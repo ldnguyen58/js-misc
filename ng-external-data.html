@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js"></script>
+    <script src="ng-external-data.js"></script>
+  </head>
+  <body>
+    <form>
+      <input ng-model="name" type="text" /><br />
+    </form>
+    <div>{{ name }}</div>
+    <div ng-controller="BasketCtrl">{{ description }}</div>
+    <table ng-controller="TimetableCtrl">
+      <tr><th>time</th><th>class</th></tr>
+      <tr ng-repeat="session in sessions">
+        <td>{{ session.time }}</td>
+        <td>{{ session.class }}</td>
+      </tr>
+    </table>
+  </body>
+</html>

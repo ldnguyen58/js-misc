@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="accordion.css"></link>
+    <script src = "jquery-1.11.3.js"></script>
+  </head>
+  <body>
+    <ul class="accordion">
+      <li>
+        <button class="accordion-control">Classic</button>
+        <div class="accordion-panel">Classic content</div>
+      </li>
+      <li>
+        <button class="accordion-control">The Flower Shop</button>
+        <div class="accordion-panel">Flowers</div>
+      </li>
+    </ul>
+    <script src = "accordion.js"></script>
+    <script type="text/javascript">
+      $('.accordion').accordion(500);
+    </script>
+  </body>
+</html>
