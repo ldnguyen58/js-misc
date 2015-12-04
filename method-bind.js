@@ -10,15 +10,22 @@ speak.apply(youngRabbit, ["Burp!"]);
 var whiteRabbitSpeak = speak.bind(youngRabbit);
 whiteRabbitSpeak("I am so white.");
 
-// var babyRabbit = (a, b) => {};
-// // var babyRabbit = function (a, b) {
-// // }.bind(this)
-// b.babyRabbit() // this = window (not b)
-
 var cow = {
   type: "cow",
   say: (sound) => {
     console.log("The " + this.type + " says " + sound);
   }
+};
+cow.say("Moo"); //this = window (not cow)
+
+function tell(sound) {
+  var t = () => {
+    console.log("The " + this.type + " says " + sound);
+  }
+  t();
 }
-cow.say("Moo");
+var bear = {
+  type: "bear",
+  tell: tell
+};
+bear.tell("Grr");
