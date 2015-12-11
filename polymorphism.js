@@ -53,6 +53,7 @@ function repeat(string, times) {
   return result;
 }
 
+//Constructor
 function TextCell(text) {
   this.text = text.split("\n");
 }
