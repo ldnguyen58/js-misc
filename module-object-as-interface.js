@@ -23,4 +23,4 @@ var month = function() {
   };
 }();
 console.log(month.name(2));
-console.log(month.number("November"));
+console.log(month.number("Nov"));

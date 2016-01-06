@@ -1,0 +1,48 @@
+<!doctype html>
+<style>
+  table  { border-collapse: collapse; }
+  td, th { border: 1px solid black; padding: 3px 8px; }
+  th     { text-align: left; }
+</style>
+<html>
+<head></head>
+<body></body>
+</html>
+<script>
+  var MOUNTAINS = [
+    {name: "Kilimanjaro", height: 5895, country: "Tanzania"},
+    {name: "Everest", height: 8848, country: "Nepal"},
+    {name: "Mount Fuji", height: 3776, country: "Japan"},
+    {name: "Mont Blanc", height: 4808, country: "Italy/France"},
+    {name: "Vaalserberg", height: 323, country: "Netherlands"},
+    {name: "Denali", height: 6168, country: "United States"},
+    {name: "Popocatepetl", height: 5465, country: "Mexico"}
+  ];
+
+  function buildTable(data) {
+    var table = document.createElement("table");
+    var head = document.createElement("tr");
+    var colNames = Object.keys(data[0]);
+    colNames.forEach(function(colName) {
+      var column = document.createElement("th");
+      column.textContent = colName;
+      head.appendChild(column);
+    });
+    table.appendChild(head);
+    data.forEach(function(obj) {
+      var row = document.createElement("tr");
+      colNames.forEach(function(colName) {
+        var cell = document.createElement("td");
+        cell.textContent = obj[colName];
+        if (typeof obj[colName] == "number")
+          cell.style.textAlign = "right";
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+    });
+
+    return table;
+  }
+
+  document.body.appendChild(buildTable(MOUNTAINS));
+</script>
