@@ -85,8 +85,6 @@ function Coin(pos) {
 }
 Coin.prototype.type = "coin";
 
-var simpleLevel = new Level(simpleLevelPlan);
-
 //==================
 var scale = 20;
 
@@ -156,4 +154,7 @@ DOMDisplay.prototype.scrollPlayerIntoView = function() {
     this.wrap.scrollTop = center.y - margin;
   else if (center.y > bottom - margin)
     this.wrap.scrollTop = center.y + margin - height;
+};
+DOMDisplay.prototype.clear = function() {
+  this.wrap.parentNode.removeChild(this.wrap);
 };
