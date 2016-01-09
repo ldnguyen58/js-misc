@@ -1,10 +1,12 @@
 <!doctype html>
+<script src="GAME_LEVELS.js"></script>
 <script src="platform-game.js"></script>
 <link rel="stylesheet" href="platform-game.css">
 
 <body>
   <script>
-    var simpleLevel = new Level(simpleLevelPlan);
-    var display = new DOMDisplay(document.body, simpleLevel);
+    // var simpleLevel = new Level(simpleLevelPlan);
+    // var display = new DOMDisplay(document.body, simpleLevel);
+    runGame(GAME_LEVELS, DOMDisplay);
   </script>
 </body>
