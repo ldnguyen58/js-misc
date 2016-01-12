@@ -284,6 +284,10 @@ function trackKeys(codes) {
   }
   addEventListener("keydown", handler);
   addEventListener("keyup", handler);
+  pressed.unregister = function() {
+    removeEventListener("keydown", handler);
+    removeEventListener("keyup", handler);
+  };
   return pressed;
 }
 function runAnimation(frameFunc) {
@@ -300,30 +304,58 @@ function runAnimation(frameFunc) {
   }
   requestAnimationFrame(frame);
 }
-var arrows = trackKeys(arrowCodes);
+
 function runLevel(level, Display, andThen) {
   var display = new Display(document.body, level);
-  runAnimation(function(step) {
+  var running = "yes";
+  function handleKey(event) {
+    if (event.keyCode == 27) {
+      if (running == "no") {
+        running = "yes";
+        runAnimation(animation);
+      } else if (running == "pausing") {
+        running = "yes";
+      } else if (running == "yes") {
+        running = "pausing";
+      }
+    }
+  }
+  addEventListener("keydown", handleKey);
+  var arrows = trackKeys(arrowCodes);
+  function animation(step) {
+    if (running == "pausing") {
+      running = "no";
+      return false;
+    }
     level.animate(step, arrows);
     display.drawFrame(step);
     if (level.isFinished()) {
       display.clear();
+      removeEventListener("keydown", handleKey);
+      arrows.unregister();
       if (andThen)
         andThen(level.status);
       return false;
     }
-  });
+  }
+  runAnimation(animation);
 }
 function runGame(plans, Display) {
-  function startLevel(n) {
+  function startLevel(n, lives) {
     runLevel(new Level(plans[n]), Display, function(status) {
-      if (status == "lost")
-        startLevel(n);
-      else if (n < plans.length - 1)
+      if (status == "lost") {
+        if (lives > 0) {
+          startLevel(n, lives - 1);
+        } else {
+          console.log("Game Over");
+          startLevel(0, 3);
+        }
+      } else if (n < plans.length - 1) {
         startLevel(n + 1);
-      else
+      } else {
         console.log("You win!");
+      }
     });
   }
-  startLevel(0);
+  startLevel(0, 3);
 }
